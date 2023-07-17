@@ -26,12 +26,17 @@ public class Heap {
     public void buildHeap(ArrayList<Student> students) {
         // Add all students to the heap
         minHeap.addAll(students);
+        for(int i =0; i < students.size();i++){
+            students.get(i).setHeaped();
+        }
 
         // Starting from the parent of the last element, perform minHeapify
         for (int i = (minHeap.size() - 1) / 2; i >= 0; i--) {
             minHeapify(i);
         }
     }
+
+
 
     /**
      * insertNode(Student in)
@@ -43,7 +48,9 @@ public class Heap {
 
     public void insertNode(Student in) {
         // Add the new student to the end of the heap
+        
         minHeap.add(in);
+        in.setHeaped();
 
         int index = minHeap.size() - 1;
         int parentIndex = getParentIndex(index);
@@ -95,7 +102,7 @@ public class Heap {
         minHeap.remove(minHeap.size() - 1);
 
         minHeapify(0); // Restore the min-heap property
-
+        minStudent.setUnHeaped();
         return minStudent;
     }
 
@@ -107,10 +114,12 @@ public class Heap {
      * @param index - the index of the item to be deleted in the min-heap.
      */
     public void delete(int index) {
+
         if (index < 0 || index >= minHeap.size()) {
             return;
         }
 
+        minHeap.get(index).setUnHeaped();
         // Replace the element to delete with the last element in the heap
         minHeap.set(index, minHeap.get(minHeap.size() - 1));
         minHeap.remove(minHeap.size() - 1);
