@@ -11,6 +11,7 @@ import java.util.*;
 public class Student {
     private int minCost;
     private int name;
+    private boolean visited;
     private ArrayList<Student> neighbors;
     private ArrayList<Integer> prices;
 
@@ -47,4 +48,17 @@ public class Student {
     public int getName() {
         return name;
     }
+
+    public void setVisited() {
+        visited = true;
+    }
+
+    public void setUnVisited() {
+        visited = false;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
 }

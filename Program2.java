@@ -28,8 +28,56 @@ public class Program2 {
      * Assume the given graph is always connected.
      */
     public int findMinimumStudentCost(Student start, Student dest) {
+
+        // Initialize a distance array or dictionary to store the tentative distances from the source node to all other nodes in the graph. Set the distance of the source node to 0 and the distances of all other nodes to infinity.
+        // Create a visited array or dictionary to keep track of the visited nodes. Initialize it as empty.
+
+        for (Student student : students) {
+            student.setVisited();
+            student.setminCost(2147483647);
+        }
+
         // TODO: implement this function
-        return -1;
+
+        //dijkstras algorithm
+
+  
+        // Create a min-heap to serve as the priority queue. Each element in the min-heap should contain a node and its corresponding distance from the source node. Initially, insert the source node with a distance of 0 into the min-heap.
+
+        minHeap.insertNode(start);
+        start.setminCost(0);
+
+
+        // While the min-heap is not empty, do the following steps:
+
+        // a. Extract the node with the smallest distance from the min-heap. This can be done by removing the top element of the min-heap.
+
+        while(!minHeap.isEmpty()){
+            Student currentStudent = minHeap.extractMin();
+            // b. Mark the extracted node as visited by adding it to the visited array or dictionary.
+            currentStudent.isVisited();
+
+
+            for(int i =0; i < currentStudent.getNeighbors().size();i++){
+                // c. For each neighbor of the extracted node, calculate the tentative distance from the source node to that neighbor. If the calculated distance is smaller than the current distance stored in the distance array or dictionary, update the distance.
+
+                Student neighbor = currentStudent.getNeighbors().get(i);
+                int neighborCost = currentStudent.getminCost() + currentStudent.getPrices().get(i);
+                neighbor.setminCost(neighborCost);
+
+                // d. If the neighbor is not visited, insert it into the min-heap with its updated distance.
+                if(!neighbor.isVisited()){
+                    minHeap.insertNode(neighbor);
+                }
+            }
+
+
+
+        }
+
+
+
+        return dest.getminCost();
     }
 
     /**
@@ -39,6 +87,11 @@ public class Program2 {
      * Assume the given graph is always connected.
      */
     public int findMinimumClassCost() {
+
+
+        //kruskals algorithm
+
+
         // TODO: implement this function
         return -1;
     }
