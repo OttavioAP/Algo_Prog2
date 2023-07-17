@@ -70,6 +70,12 @@ public class Heap {
     }
 
 
+    public boolean isEmpty() {
+        if (minHeap.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * extractMin()
@@ -191,7 +197,7 @@ public class Heap {
         minHeap.set(i, minHeap.get(j));
         minHeap.set(j, temp);
     }
-}
+
 
     public String toString() {
         String output = "";
