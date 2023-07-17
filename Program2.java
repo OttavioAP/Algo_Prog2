@@ -29,18 +29,18 @@ public class Program2 {
      */
     public int findMinimumStudentCost(Student start, Student dest) {
 
+        System.out.println("start is " + start.getName());
+        System.out.println("dest is " + dest.getName());
+
         // Initialize a distance array or dictionary to store the tentative distances from the source node to all other nodes in the graph. Set the distance of the source node to 0 and the distances of all other nodes to infinity.
         // Create a visited array or dictionary to keep track of the visited nodes. Initialize it as empty.
 
-        for (Student student : students) {
-            student.setVisited();
-            student.setminCost(2147483647);
-        }
+        // for (Student student : students) {
+        //     student.setunVisited();
+        //     student.setminCost(2147483647);
+        // }
 
-        // TODO: implement this function
-
-        //dijkstras algorithm
-
+   
   
         // Create a min-heap to serve as the priority queue. Each element in the min-heap should contain a node and its corresponding distance from the source node. Initially, insert the source node with a distance of 0 into the min-heap.
 
@@ -52,22 +52,31 @@ public class Program2 {
 
         // a. Extract the node with the smallest distance from the min-heap. This can be done by removing the top element of the min-heap.
 
-        while(!minHeap.isEmpty()){
-            Student currentStudent = minHeap.extractMin();
+        while(!minHeap.isEmpty()){ //runs n times since each node is visited once
+            Student currentStudent = minHeap.extractMin(); //logv 
             // b. Mark the extracted node as visited by adding it to the visited array or dictionary.
-            currentStudent.isVisited();
-
+            currentStudent.setVisited();
 
             for(int i =0; i < currentStudent.getNeighbors().size();i++){
                 // c. For each neighbor of the extracted node, calculate the tentative distance from the source node to that neighbor. If the calculated distance is smaller than the current distance stored in the distance array or dictionary, update the distance.
 
                 Student neighbor = currentStudent.getNeighbors().get(i);
-                int neighborCost = currentStudent.getminCost() + currentStudent.getPrices().get(i);
-                neighbor.setminCost(neighborCost);
 
+                int neighborCost = currentStudent.getminCost() + currentStudent.getPrices().get(i);
+
+                if(neighborCost < neighbor.getminCost()){
+                    neighbor.setminCost(neighborCost);
+                }
+                
+                //what if the neighbor is already in the heap?
                 // d. If the neighbor is not visited, insert it into the min-heap with its updated distance.
                 if(!neighbor.isVisited()){
-                    minHeap.insertNode(neighbor);
+                    if(neighbor.isHeaped()){
+                        minHeap.changeKey(neighbor, neighborCost);
+                    }else{
+                        minHeap.insertNode(neighbor);
+                    }
+
                 }
             }
 

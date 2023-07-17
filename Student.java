@@ -12,6 +12,7 @@ public class Student {
     private int minCost;
     private int name;
     private boolean visited;
+    private boolean heaped;
     private ArrayList<Student> neighbors;
     private ArrayList<Integer> prices;
 
@@ -20,6 +21,17 @@ public class Student {
         minCost = Integer.MAX_VALUE;
         neighbors = new ArrayList<Student>();
         prices = new ArrayList<Integer>();
+        visited = false;
+        heaped = false;
+    }
+
+    public Student(int x,int cost) {
+    name = x;
+    minCost = cost;
+    neighbors = new ArrayList<Student>();
+    prices = new ArrayList<Integer>();
+    visited = false;
+    heaped = false;
     }
 
     public void setNeighborAndPrice(Student n, Integer w) {
@@ -59,6 +71,18 @@ public class Student {
 
     public boolean isVisited() {
         return visited;
+    }
+
+    public void setHeaped() {
+        heaped = true;
+    }
+
+    public void setUnHeaped() {
+        heaped = false;
+    }
+
+    public boolean isHeaped() {
+        return heaped;
     }
 
 }

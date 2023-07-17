@@ -126,7 +126,7 @@ public class Driver {
             // test out Program2.java findMinimumStudentCost here
             System.out.println("\nGiven wire configuration: ");
             System.out.println(testProgram2);
-            System.out.println("Minimum student cost: \n" + testProgram2.findMinimumStudentCost(students.get(0), students.get(1)));
+            System.out.println("Minimum student cost: \n" + testProgram2.findMinimumStudentCost(students.get(0), students.get(4)));
         }
 
         if (testMinClassCost) {
