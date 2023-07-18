@@ -125,7 +125,7 @@ public class Program2 {
                 //add edge to minspantree
                 minSpanTree.add(currentEdge);
                 classCost += currentEdge.getCost();
-                System.out.println("adding edge from" + currentEdge.getStudent1().getName() + "to " + currentEdge.getStudent2().getName() + "with cost " + currentEdge.getCost());
+               // System.out.println("adding edge from" + currentEdge.getStudent1().getName() + "to " + currentEdge.getStudent2().getName() + "with cost " + currentEdge.getCost());
 
                 //for each edge of student2
                     //add all of its edges to the minheap
