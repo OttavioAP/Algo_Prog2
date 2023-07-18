@@ -29,8 +29,8 @@ public class Program2 {
      */
     public int findMinimumStudentCost(Student start, Student dest) {
 
-        System.out.println("start is " + start.getName());
-        System.out.println("dest is " + dest.getName());
+        //System.out.println("start is " + start.getName());
+       // System.out.println("dest is " + dest.getName());
 
         // Initialize a distance array or dictionary to store the tentative distances from the source node to all other nodes in the graph. Set the distance of the source node to 0 and the distances of all other nodes to infinity.
         // Create a visited array or dictionary to keep track of the visited nodes. Initialize it as empty.
@@ -125,13 +125,16 @@ public class Program2 {
                 //add edge to minspantree
                 minSpanTree.add(currentEdge);
                 classCost += currentEdge.getCost();
-                System.out.println("adding edge from" + currentEdge.getStudent1().getName() + "to " + currentEdge.getStudent2().getName() + "with cost " + currentEdge.getCost());
+               // System.out.println("adding edge from" + currentEdge.getStudent1().getName() + "to " + currentEdge.getStudent2().getName() + "with cost " + currentEdge.getCost());
 
                 //for each edge of student2
                     //add all of its edges to the minheap
                 for(int i = 0; i < visitStudent.getNeighbors().size();i++){
-                    Edge newEdge = new Edge(visitStudent.getPrices().get(i),visitStudent,visitStudent.getNeighbors().get(i));
-                    edgeHeap.insertNode(newEdge);
+                    if(!visitStudent.getNeighbors().get(i).isVisited()){
+                        Edge newEdge = new Edge(visitStudent.getPrices().get(i),visitStudent,visitStudent.getNeighbors().get(i));
+                        edgeHeap.insertNode(newEdge);
+                    }
+
                 }
             }
                 
