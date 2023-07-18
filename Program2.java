@@ -96,10 +96,51 @@ public class Program2 {
      * Assume the given graph is always connected.
      */
     public int findMinimumClassCost() {
+        // Initialize an empty MST and a set of visited vertices. Start with any vertex as the initial vertex.
+        ArrayList<Edge> minSpanTree = new ArrayList<>();
 
+        // Create a priority queue (min-heap) to store the edges of the graph. Each element in the priority queue will represent an edge with its weight.
 
-        //kruskals algorithm
+        edgeHeap edgeHeap = new edgeHeap();
 
+        //catch case of empty student array
+        if(students.isEmpty()){
+            return -1;
+        }
+
+        //get any student to start with
+        Student startingStudent = students.get(0);
+
+        // Assign a weight of 0 to the initial vertex and add it to the priority queue.
+        Edge startEdge = new Edge(0,startingStudent,startingStudent); //first student is always visted, second student always unvisited
+        //prims algorithm
+        edgeHeap.insertNode(startEdge);
+
+        while(!edgeHeap.isEmpty()){
+
+            //extract an edge
+            Edge currentEdge = edgeHeap.extractMin();
+            currentEdge.setUnHeaped();
+            Student visitStudent = currentEdge.getStudent2();
+            //check if student2 is unvisited
+            if(!visitStudent.isVisited()){
+                //if so, mark student2 as visited
+                visitStudent.setVisited();
+                //add edge to minspantree
+                minSpanTree.add(currentEdge);
+
+                //for each edge of student2
+                    //add all of its edges to the minheap
+                for(int i = 0; i < visitStudent.getNeighbors().size();i++){
+                    Edge newEdge = new Edge(visitStudent.getPrices().get(i),visitStudent,visitStudent.getNeighbors().get(i));
+                    edgeHeap.insertNode(newEdge);
+                }
+            }
+                
+                
+                
+
+        }
 
         // TODO: implement this function
         return -1;
