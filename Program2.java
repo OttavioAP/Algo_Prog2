@@ -130,8 +130,11 @@ public class Program2 {
                 //for each edge of student2
                     //add all of its edges to the minheap
                 for(int i = 0; i < visitStudent.getNeighbors().size();i++){
-                    Edge newEdge = new Edge(visitStudent.getPrices().get(i),visitStudent,visitStudent.getNeighbors().get(i));
-                    edgeHeap.insertNode(newEdge);
+                    if(!visitStudent.getNeighbors().get(i).isVisited()){
+                        Edge newEdge = new Edge(visitStudent.getPrices().get(i),visitStudent,visitStudent.getNeighbors().get(i));
+                        edgeHeap.insertNode(newEdge);
+                    }
+
                 }
             }
                 
