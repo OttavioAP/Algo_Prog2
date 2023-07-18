@@ -34,12 +34,6 @@ public class Program2 {
 
         // Initialize a distance array or dictionary to store the tentative distances from the source node to all other nodes in the graph. Set the distance of the source node to 0 and the distances of all other nodes to infinity.
         // Create a visited array or dictionary to keep track of the visited nodes. Initialize it as empty.
-
-        // for (Student student : students) {
-        //     student.setunVisited();
-        //     student.setminCost(2147483647);
-        // }
-
    
   
         // Create a min-heap to serve as the priority queue. Each element in the min-heap should contain a node and its corresponding distance from the source node. Initially, insert the source node with a distance of 0 into the min-heap.
@@ -97,12 +91,58 @@ public class Program2 {
      */
     public int findMinimumClassCost() {
 
+        int classCost = 0;
+        // Initialize an empty MST and a set of visited vertices. Start with any vertex as the initial vertex.
+        ArrayList<Edge> minSpanTree = new ArrayList<>();
 
-        //kruskals algorithm
+        // Create a priority queue (min-heap) to store the edges of the graph. Each element in the priority queue will represent an edge with its weight.
 
+        edgeHeap edgeHeap = new edgeHeap();
 
-        // TODO: implement this function
-        return -1;
+        //catch case of empty student array
+        if(students.isEmpty()){
+            return -1;
+        }
+
+        //get any student to start with
+        Student startingStudent = students.get(0);
+
+        // Assign a weight of 0 to the initial vertex and add it to the priority queue.
+        Edge startEdge = new Edge(0,startingStudent,startingStudent); //first student is always visted, second student always unvisited
+        //prims algorithm
+        edgeHeap.insertNode(startEdge);
+
+        while(!edgeHeap.isEmpty()){
+
+            //extract an edge
+            Edge currentEdge = edgeHeap.extractMin();
+            currentEdge.setUnHeaped();
+            Student visitStudent = currentEdge.getStudent2();
+            //check if student2 is unvisited
+            if(!visitStudent.isVisited()){
+                //if so, mark student2 as visited
+                visitStudent.setVisited();
+                //add edge to minspantree
+                minSpanTree.add(currentEdge);
+                classCost += currentEdge.getCost();
+                System.out.println("adding edge from" + currentEdge.getStudent1().getName() + "to " + currentEdge.getStudent2().getName() + "with cost " + currentEdge.getCost());
+
+                //for each edge of student2
+                    //add all of its edges to the minheap
+                for(int i = 0; i < visitStudent.getNeighbors().size();i++){
+                    Edge newEdge = new Edge(visitStudent.getPrices().get(i),visitStudent,visitStudent.getNeighbors().get(i));
+                    edgeHeap.insertNode(newEdge);
+                }
+            }
+                
+                
+                
+
+        }
+
+        
+   
+        return classCost;
     }
 
     //returns edges and prices in a string.
