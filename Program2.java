@@ -34,12 +34,6 @@ public class Program2 {
 
         // Initialize a distance array or dictionary to store the tentative distances from the source node to all other nodes in the graph. Set the distance of the source node to 0 and the distances of all other nodes to infinity.
         // Create a visited array or dictionary to keep track of the visited nodes. Initialize it as empty.
-
-        // for (Student student : students) {
-        //     student.setunVisited();
-        //     student.setminCost(2147483647);
-        // }
-
    
   
         // Create a min-heap to serve as the priority queue. Each element in the min-heap should contain a node and its corresponding distance from the source node. Initially, insert the source node with a distance of 0 into the min-heap.
@@ -96,6 +90,8 @@ public class Program2 {
      * Assume the given graph is always connected.
      */
     public int findMinimumClassCost() {
+
+        int classCost = 0;
         // Initialize an empty MST and a set of visited vertices. Start with any vertex as the initial vertex.
         ArrayList<Edge> minSpanTree = new ArrayList<>();
 
@@ -128,6 +124,8 @@ public class Program2 {
                 visitStudent.setVisited();
                 //add edge to minspantree
                 minSpanTree.add(currentEdge);
+                classCost += currentEdge.getCost();
+                System.out.println("adding edge from" + currentEdge.getStudent1().getName() + "to " + currentEdge.getStudent2().getName() + "with cost " + currentEdge.getCost());
 
                 //for each edge of student2
                     //add all of its edges to the minheap
@@ -142,8 +140,9 @@ public class Program2 {
 
         }
 
-        // TODO: implement this function
-        return -1;
+        
+   
+        return classCost;
     }
 
     //returns edges and prices in a string.
